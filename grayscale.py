@@ -4,6 +4,14 @@ import numpy as np
 
 def detect_grayscale(image_path, tolerance=10, threshold=0.70):
     with Image.open(image_path) as img:
+
+        m = img.mode
+        if m == 'L':
+            return {
+                'mode': m,
+                'grayscale': True
+            }
+
         ### splitting b,g,r channels
         r, g, b = img.split()
 
@@ -39,5 +47,6 @@ def detect_grayscale(image_path, tolerance=10, threshold=0.70):
             },
             'tolerance': tolerance,
             'threshold': threshold,
+            'mode': m,
             'grayscale': result
         }
